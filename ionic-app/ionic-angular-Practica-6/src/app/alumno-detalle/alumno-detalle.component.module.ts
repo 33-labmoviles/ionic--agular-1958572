@@ -9,3 +9,4 @@ import { AlumnoDetalleComponent } from './alumno-detalle.component';
   exports: [AlumnoDetalleComponent]
 })
 export class ListaComponentModule {}
+
