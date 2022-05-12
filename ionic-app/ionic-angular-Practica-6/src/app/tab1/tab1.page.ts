@@ -77,10 +77,20 @@ export class Tab1Page {
         "Matricula": this.Matricula
       }
       this.alumnos.push(nuevoAlumno);
-      this.alumnos.sort();
-      console.log(this.alumnos);
+      this.alumnos.sort(function(a, b) {
+        var nameA = a.Nombre.toUpperCase(); 
+        var nameB = b.Nombre.toUpperCase(); 
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
       
-    }
+        return 0;
+      });
+    
+        console.log(this.alumnos); //Imprimir en consola el nuevo arreglo
+      }
+  }
   
-
-}

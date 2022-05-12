@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FirebasebdService } from '../firebasebd.service';
-
 @Component({
   selector: 'app-alumnos',
   templateUrl: './alumnos.component.html',
@@ -9,20 +7,10 @@ import { FirebasebdService } from '../firebasebd.service';
 })
 export class AlumnosComponent implements OnInit {
 
-  constructor(private db : FirebasebdService) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.cargarAlumnos();
-  }
-
-  alumnos: any = [];
+  ngOnInit() {}
 
   
-
-  cargarAlumnos() {
-    this.db.getAlumnos().subscribe(res => {
-      this.alumnos = res;
-    })
-  }
-
+alumnos: any = [];
 }

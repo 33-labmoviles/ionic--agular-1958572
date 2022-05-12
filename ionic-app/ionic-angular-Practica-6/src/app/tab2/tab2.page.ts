@@ -1,78 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  alumnos = [
-    {
-      "Nombre": "Kevin",
-      "Apellidos": "Gatica Vega",
-      "Matricula": "1958572",
-      "image": "assets/icon/logo.png"
-      
-    },
-    {
-      "Nombre": "Marcelo",
-      "Apellidos": "Reyes",
-      "Matricula": "1234567",
-      "image": "assets/icon/logo.png"
-      
-    },
-    {
-      "Nombre": "Eric",
-      "Apellidos": "Rodriguez",
-      "Matricula": "7654321",
-      "image": "assets/icon/logo.png"
-      
-    },
-    {
-      "Nombre": "Alberto",
-      "Apellidos": "Flores",
-      "Matricula": "11111111",
-      "image": "assets/icon/logo.png"
-      
-    },
-    {
-      "Nombre": "Diego",
-      "Apellidos": "Davila",
-      "Matricula": "3331112",
-      "image": "assets/icon/logo.png"
-      
-    },
-    {
-      "Nombre": "Luis",
-      "Apellidos": "Otoñiel",
-      "Matricula": "1671234",
-      "image": "assets/icon/logo.png"
-      
-    },
-    {
-      "Nombre": "Emiliano",
-      "Apellidos": "Zapata",
-      "Matricula": "6666666",
-      "image": "assets/icon/logo.png"
-      
-    },
-    {
-      "Nombre": "Mario",
-      "Apellidos": "Bros",
-      "Matricula": "1234512",
-      "image": "assets/icon/logo.png"
-      
-    },
-    {
-      "Nombre": "Pana",
-      "Apellidos": "Miguel",
-      "Matricula": "3433321",
-      "image": "assets/icon/logo.png"
-      
-    }
-  ];
-  
+ngOnInit(): void {
+  this.getAlumnos();
+}
+alumnos : any = [];
+
+getAlumnos() {
+  return this.http.get('https://insta-base-033-default-rtdb.firebaseio.com/alumnos.json').subscribe(res => {
+
+ //this.alumnos = res;
+
+  const alumnosRes: any = res; //this.alumnos = res;
+
+  console.log(alumnosRes, "alumnosRes")
+  const alumnosArray = Object.keys(res).forEach((key: any) => {
+       
+        (this.alumnos).push(alumnosRes[key]);
+
+        console.log(this.alumnos, "alumnos")
+      })
+  });
+}
+
+
 }

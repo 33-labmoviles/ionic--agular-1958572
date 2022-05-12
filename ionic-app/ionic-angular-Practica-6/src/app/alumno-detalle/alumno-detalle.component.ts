@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
+
 @Component({
   selector: 'app-alumno-detalle',
   templateUrl: './alumno-detalle.component.html',
@@ -8,11 +9,15 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class AlumnoDetalleComponent implements OnInit {
 
-  constructor(private ruta: ActivatedRoute,public actionSheetController: ActionSheetController) { }
+  constructor(
+    private ruta: ActivatedRoute,
+    public actionSheetC: ActionSheetController) { }
+  
 
   ngOnInit() {
-    this.obtenerDetalleAlumno(this.matricula);
+    this.obtenerDetalleAlumno(this.Matricula);
   }
+
   alumnos = [
     {
       "Nombre": "Kevin",
@@ -79,66 +84,71 @@ export class AlumnoDetalleComponent implements OnInit {
     }
   ];
 
-    alumnoDetalle: any={};
-    matricula: string=this.ruta.snapshot.params.id;
-    obtenerDetalleAlumno(Matricula: string): any{
-      console.log(Matricula);
-
-      for (let i = 0; i < this.alumnos.length; i++) {
-        if(Matricula==this.alumnos[i].Matricula){
-          this.alumnoDetalle=this.alumnos[i];
-        }
-      }
-      return this.alumnoDetalle;
-    }
-    async presentActionSheet() {
-      const actionSheet = await this.actionSheetController.create({
-        header: 'Albums',
-        cssClass: 'my-custom-class',
-        mode: 'ios', 
-        buttons: [{
-          text: 'Eliminar',
-          role: 'destructive',
-          icon: 'trash',
-          id: 'delete-button',
-          data: {
-            type: 'Delete'
-          },
-          handler: () => {
-            console.log('Delete clicked');
-          }
-        }, {
-          text: 'Couta',
-          icon: 'share',
-          data: 10,
-          handler: () => {
-            console.log('Share clicked');
-          }
-        }, {
-          text: 'Play (abrir modal)',
-          icon: 'caret-forward-circle',
-          data: 'Data value',
-          handler: () => {
-            console.log('Play clicked');
-          }
-        }, {
-          text: 'Favorito',
-          icon: 'heart',
-          handler: () => {
-            console.log('Favorite clicked');
-          }
-        }, {
-          text: 'Cancelar',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }]
-      });
-      await actionSheet.present();
+  alumnoDetalle: any = {}
+  Matricula: string = this.ruta.snapshot.params.id;
   
-      const { role, data } = await actionSheet.onDidDismiss();
-      console.log('onDidDismiss resolved with role and data', role, data);
+  obtenerDetalleAlumno(Matricula: string): any {
+    console.log(Matricula);
+    
+
+    //AQUI BUSCA EN EL ARREGLO EL ALUMNO CON LA MATRICULA
+    for(let i = 0; i < this.alumnos.length; i++){
+      if(Matricula == this.alumnos[i].Matricula){
+        this.alumnoDetalle = this.alumnos[i];
+      }
     }
+
+    return this.alumnoDetalle;
+  }
+
+
+  async mostrarActionSheet() {
+    const actionSheet = await this.actionSheetC.create({
+      header: 'Opciones',
+      cssClass: 'mi-primer-action-sheet',
+      buttons: [{
+        text: 'Delete',
+        role: 'destructive',
+        icon: 'trash',
+        id: 'delete-button',
+        data: {
+          type: 'delete'
+        },
+        handler: () => {
+          console.log('Delete clicked');
+        }
+      }, {
+        text: 'Share',
+        icon: 'share',
+        data: 10,
+        handler: () => {
+          console.log('Share clicked');
+        }
+      }, {
+        text: 'Play (open modal)',
+        icon: 'caret-forward-circle',
+        data: 'Data value',
+        handler: () => {
+          console.log('Play clicked');
+        }
+      }, {
+        text: 'Favorite',
+        icon: 'heart',
+        handler: () => {
+          console.log('Favorite clicked');
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    console.log('onDidDismiss resolved with role and data', role, data);
+  }
 }
