@@ -7,8 +7,8 @@ import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 
-import { AlumnosComponentModule } from '../alumnos/alumnos.component.module';
 
+import { AlumnosComponentModule } from '../alumnos/alumnos.component.module';
 
 @NgModule({
   imports: [

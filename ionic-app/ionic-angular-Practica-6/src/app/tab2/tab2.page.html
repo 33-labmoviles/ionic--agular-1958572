@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Alumnos
+      Tab 2
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-router-outlet></ion-router-outlet>
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -13,11 +13,44 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    <ion-item *ngFor="let alumno of alumnos" [routerLink]="['/alumno-detalle',alumno.Matricula]">
-      <ion-img src="{{alumno.image}}" width ="20px"></ion-img>
-      <ion-label>{{alumno.Nombre}}</ion-label>
-    </ion-item>
-  </ion-list>
-</ion-content>
+ 
 
+
+
+ <ion-list mode="ios">
+  <ion-item-sliding   *ngFor="let alumno of alumnos; let i = index;" >
+    <ion-item-options side="start">
+      <ion-item-option color="success">
+        <ion-icon name="heart"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+
+    <ion-item-options side="end">
+      <ion-item-option color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+
+    <ion-item [routerLink]="['/alumno-detalle', alumno.matricula]">
+      <ion-avatar>
+        <ion-img src="assets/icon/logo.png"></ion-img>
+      </ion-avatar>
+      
+      <ion-label> {{i}}
+
+        <h2><strong>{{alumno.nombre}}</strong> </h2>
+        
+      </ion-label>
+    </ion-item>
+  </ion-item-sliding>
+
+ 
+</ion-list> 
+  <!--alumnos-->
+  <!--<ion-list>
+    <ion-item  *ngFor="let alumno of alumnos" [routerLink]="['/alumno-detalle', alumno.matricula]">
+      <ion-img [src]="alumno.imagen"></ion-img>
+      <ion-label><strong>{{alumno.nombre}}</strong> </ion-label>
+    </ion-item>
+  </ion-list> -->
+</ion-content>

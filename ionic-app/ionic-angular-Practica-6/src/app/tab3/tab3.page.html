@@ -1,3 +1,4 @@
+{{ modelo | json }}
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
@@ -13,5 +14,36 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+ 
+    <!--Algo aqui-->
+    <form #agregarAlumno="ngForm" (ngSubmit)="onSubmit(agregarAlumno)">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+            Nombre:
+          </ion-col>
+          <ion-col size="10">
+              <ion-input  placeholder="Juanito" [(ngModel)]="Nombre" name="nombre" class="campo-texto"></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            Apellido:
+          </ion-col>
+          <ion-col size="10"> {{Apellidos}}
+            <ion-input placeholder="Perez" [(ngModel)]="Apellidos" name="apellido"  class="campo-texto"></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            Matricula:
+          </ion-col>
+          <ion-col size="10">
+            <ion-input placeholder="ABC123" [(ngModel)]="Matricula" name="matricula"  class="campo-texto"></ion-input>
+          </ion-col>
+          
+          <ion-col size="12">
+            <ion-button type="submit">Agregar Alumno</ion-button>
+          </ion-col>
+            
+        </ion-row>
+      </ion-grid>
+    </form>
+
 </ion-content>
